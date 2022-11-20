@@ -52,8 +52,6 @@ class User(db.Model):
             "email": self.email
         }
     
-        
-    
 
 # Item class
 class Item(db.Model):
