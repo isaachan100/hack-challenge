@@ -76,6 +76,9 @@ class Item(db.Model):
         """
         self.description = kwargs.get("description")
         self.found = kwargs.get("found")
+        self.category_id = kwargs.get("category_id")
+        self.location_id = kwargs.get("location_id")
+        self.user_id = kwargs.get("user_id")
 
     def serialize(self):
         """
