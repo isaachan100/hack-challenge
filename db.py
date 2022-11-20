@@ -3,24 +3,16 @@ import datetime
 
 db = SQLAlchemy()
 
-# join table for users and items
-association_table = db.Table(
-    "association",
-    db.Column("user_id", db.Integer, db.ForeignKey("item.id")),
-    db.Column("item_id", db.Integer, db.ForeignKey("user.id"))
-)
-
-
 # User class
 
 class User(db.Model):
     """
-    a user of the app, many to many relationship with item
+    a user of the app, one to many relationship with item
     """
 
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    items = db.relationship("Item", secondary = association_table, back_populates = "users")
+    items = db.relationship("Item", cascade = "delete")
     name = db.Column(db.String, nullable = False)
 
     #user information
@@ -39,6 +31,28 @@ class User(db.Model):
         self.name = kwargs.get("name")
         self.email = kwargs.get("email")
         
+    def serialize(self):
+        """
+        serializes a user object
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "items": [i.simple_serialize() for i in self.items]
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a user object
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email
+        }
+    
+        
     
 
 # Item class
@@ -54,10 +68,37 @@ class Item(db.Model):
     found = db.Column(db.Integer, nullable = False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable = False)
     location_id = db.Column(db.Integer, db.ForeignKey("location.id"), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
 
     def __init__(self, **kwargs):
+        """
+        initializes an item object
+        """
         self.description = kwargs.get("description")
         self.found = kwargs.get("found")
+
+    def serialize(self):
+        """
+        serializes an item object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "found": self.found,
+            "category": Category.query.filter_by(id = self.category_id).first().simple_serialize(),
+            "location": Location.query.filter_by(id = self.location_id).first().simple_serialize(),
+            "user": User.query.filter_by(id = self.user_id).first().simple_serialize()
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes an item object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "found": self.found
+        }
 
 # Location class
 class Location(db.Model):
@@ -76,6 +117,25 @@ class Location(db.Model):
         """
         self.description = kwargs.get("description")
 
+    def serialize(self):
+        """
+        serializes a location object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "items": [i.simple_serialize() for i in self.items]
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a location object
+        """
+        return {
+            "id": self.id,
+            "description": self.description
+        }
+
 # category class
 class Category(db.Model):
     """
@@ -92,3 +152,22 @@ class Category(db.Model):
         initializes a category object
         """
         self.description = kwargs.get("description")
+
+    def serialize(self):
+        """
+        serializes a category object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "items": [i.simple_serialize() for i in self.items]
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a category object
+        """
+        return {
+            "id": self.id,
+            "description": self.description
+        }
