@@ -26,32 +26,33 @@ def failure_response(message, code = 400):
 
 # User routes
 
-@app.route("/api/users/", METHODS=["GET"])
+@app.route("/api/users/", methods=["GET"])
 def get_users():
     users = [User.serialize() for User in User.query.all()]
     return success_response({'Users': users})
 
 
-@app.route("/api/users/", METHODS=["POST"])
+@app.route("/api/users/", methods=["POST"])
 def create_user():
     body = json.loads(request.data)
-    username = body.get("username")
+    name = body.get("name")
     email = body.get("email")
-    password = body.get("password")
-    verify_password = body.get("verify_password")
-    if not username or not email or not password or not verify_password:
+    # password = body.get("password")
+    # verify_password = body.get("verify_password")
+    # or not password or not verify_password:
+    if not name or not email:
         return failure_response("Missing required fields", 400)
-    if password != verify_password:
-        return failure_response("Passwords do not match", 400)
+    # if password != verify_password:
+    #     return failure_response("Passwords do not match", 400)
     if User.query.filter_by(email = email).first():
         return failure_response("Email already in use", 400)
-    user = User(username = username, email = email, password = password)
+    user = User(name = name, email = email)
     db.session.add(user)
     db.session.commit()
     return success_response(user.serialize(), 201)
     
 
-@app.route("/api/users/<int:user_id>/", METHODS=["GET"])
+@app.route("/api/users/<int:user_id>/", methods=["GET"])
 def get_user(user_id):
     user = User.query.filter_by(id = user_id).first()
     if not user:
@@ -59,7 +60,7 @@ def get_user(user_id):
     return success_response(user.serialize())
 
 
-@app.route("/api/users/<int:user_id>/", METHODS=["DELETE"])
+@app.route("/api/users/<int:user_id>/", methods=["DELETE"])
 def delete_user(user_id):
     user = User.query.filter_by(id = user_id).first()
     if not user:
@@ -72,20 +73,20 @@ def delete_user(user_id):
 
 # Item routes
 
-@app.route("/api/items/", METHODS=["GET"])
+@app.route("/api/items/", methods=["GET"])
 def get_items():
     items = [Item.serialize() for Item in Item.query.all()]
     return success_response({'Items': items})
 
-@app.route("/api/items/", METHODS=["POST"])
+@app.route("/api/items/", methods=["POST"])
 def create_item():
     pass
 
-@app.route("/api/items/<int:item_id>/", METHODS=["GET"])
+@app.route("/api/items/<int:item_id>/", methods=["GET"])
 def get_item(item_id):
     pass
 
-@app.route("/api/items/<int:item_id>/", METHODS=["DELETE"])
+@app.route("/api/items/<int:item_id>/", methods=["DELETE"])
 def delete_item(item_id):
     pass
 
