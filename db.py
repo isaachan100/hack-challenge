@@ -71,8 +71,34 @@ class Item(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
 
     def __init__(self, **kwargs):
+        """
+        initializes an item object
+        """
         self.description = kwargs.get("description")
         self.found = kwargs.get("found")
+
+    def serialize(self):
+        """
+        serializes an item object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "found": self.found,
+            "category": Category.query.filter_by(id = self.category_id).first().simple_serialize(),
+            "location": Location.query.filter_by(id = self.location_id).first().simple_serialize(),
+            "user": User.query.filter_by(id = self.user_id).first().simple_serialize()
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes an item object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "found": self.found
+        }
 
 # Location class
 class Location(db.Model):
@@ -91,6 +117,25 @@ class Location(db.Model):
         """
         self.description = kwargs.get("description")
 
+    def serialize(self):
+        """
+        serializes a location object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "items": [i.simple_serialize() for i in self.items]
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a location object
+        """
+        return {
+            "id": self.id,
+            "description": self.description
+        }
+
 # category class
 class Category(db.Model):
     """
@@ -107,3 +152,22 @@ class Category(db.Model):
         initializes a category object
         """
         self.description = kwargs.get("description")
+
+    def serialize(self):
+        """
+        serializes a category object
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "items": [i.simple_serialize() for i in self.items]
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a category object
+        """
+        return {
+            "id": self.id,
+            "description": self.description
+        }
