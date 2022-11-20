@@ -20,12 +20,12 @@ class User(db.Model):
 
     #user information
     email = db.Column(db.String, nullable = False, unique = True)
-    password_digest = db.Column(db.String, nullable = False)
+    # password_digest = db.Column(db.String, nullable = False)
 
     #session information
-    session_token = db.Column(db.String, nullable=False, unique=True)
-    session_expiration = db.Column(db.DateTime, nullable=False)
-    update_token = db.Column(db.String, nullable=False, unique=True)
+    # session_token = db.Column(db.String, nullable=False, unique=True)
+    # session_expiration = db.Column(db.DateTime, nullable=False)
+    # update_token = db.Column(db.String, nullable=False, unique=True)
 
     def __init__(self, **kwargs):
         """
@@ -149,7 +149,7 @@ class Location(db.Model):
     
     __tablename__ = "location"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    description = db.String(db.String, nullable = False)
+    description = db.Column(db.String, nullable = False)
     items = db.relationship("Item")
 
     def __init__(self, **kwargs):
@@ -185,7 +185,7 @@ class Category(db.Model):
 
     __tablename__ = "category"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    description = db.String(db.String, nullable = False)
+    description = db.Column(db.String, nullable = False)
     items = db.relationship("Item")
 
     def __init__(self, **kwargs):
