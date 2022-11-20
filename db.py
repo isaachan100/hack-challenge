@@ -3,24 +3,16 @@ import datetime
 
 db = SQLAlchemy()
 
-# join table for users and items
-association_table = db.Table(
-    "association",
-    db.Column("user_id", db.Integer, db.ForeignKey("item.id")),
-    db.Column("item_id", db.Integer, db.ForeignKey("user.id"))
-)
-
-
 # User class
 
 class User(db.Model):
     """
-    a user of the app, many to many relationship with item
+    a user of the app, one to many relationship with item
     """
 
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    items = db.relationship("Item", secondary = association_table, back_populates = "users")
+    items = db.relationship("Item", cascade = "delete")
     name = db.Column(db.String, nullable = False)
 
     #user information
@@ -39,6 +31,28 @@ class User(db.Model):
         self.name = kwargs.get("name")
         self.email = kwargs.get("email")
         
+    def serialize(self):
+        """
+        serializes a user object
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "items": [i.simple_serialize() for i in self.items]
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a user object
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email
+        }
+    
+        
     
 
 # Item class
@@ -54,6 +68,7 @@ class Item(db.Model):
     found = db.Column(db.Integer, nullable = False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable = False)
     location_id = db.Column(db.Integer, db.ForeignKey("location.id"), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
 
     def __init__(self, **kwargs):
         self.description = kwargs.get("description")
