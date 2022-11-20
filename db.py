@@ -37,6 +37,7 @@ class User(db.Model):
         initializes a user object
         """
         self.name = kwargs.get("name")
+        self.email = kwargs.get("email")
         
     
 
@@ -47,15 +48,47 @@ class Item(db.Model):
     category, one to many relationship with location
     """
 
+    __tablename__ = "item"
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    description = db.Column(db.String, nullable = False)
+    found = db.Column(db.Integer, nullable = False)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable = False)
+    location_id = db.Column(db.Integer, db.ForeignKey("location.id"), nullable = False)
+
+    def __init__(self, **kwargs):
+        self.description = kwargs.get("description")
+        self.found = kwargs.get("found")
 
 # Location class
 class Location(db.Model):
     """
     a location where an item was lost/found, one to many relationship with item
     """
+    
+    __tablename__ = "location"
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    description = db.String(db.String, nullable = False)
+    items = db.relationship("Item")
+
+    def __init__(self, **kwargs):
+        """
+        initializes a location object
+        """
+        self.description = kwargs.get("description")
 
 # category class
 class Category(db.Model):
     """
     a category that a lost item falls into, one to many relationship with item
     """
+
+    __tablename__ = "category"
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    description = db.String(db.String, nullable = False)
+    items = db.relationship("Item")
+
+    def __init__(self, **kwargs):
+        """
+        initializes a category object
+        """
+        self.description = kwargs.get("description")
