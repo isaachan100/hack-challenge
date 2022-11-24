@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07C7A076292F0BB700750B6D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A075292F0BB700750B6D /* MainView.swift */; };
+		07C7A07A292F0D9C00750B6D /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A079292F0D9C00750B6D /* Tab.swift */; };
+		07C7A07C292F17AD00750B6D /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A07B292F17AD00750B6D /* CustomCorner.swift */; };
+		07C7A07E292F1E4800750B6D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A07D292F1E4800750B6D /* Home.swift */; };
 		07DC9FD8292ECB15007BFB6E /* BigRedBountyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC9FD7292ECB15007BFB6E /* BigRedBountyApp.swift */; };
 		07DC9FDA292ECB15007BFB6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC9FD9292ECB15007BFB6E /* ContentView.swift */; };
 		07DC9FDC292ECB16007BFB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07DC9FDB292ECB16007BFB6E /* Assets.xcassets */; };
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07C7A075292F0BB700750B6D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		07C7A079292F0D9C00750B6D /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		07C7A07B292F17AD00750B6D /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
+		07C7A07D292F1E4800750B6D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		07DC9FD4292ECB15007BFB6E /* BigRedBounty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigRedBounty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC9FD7292ECB15007BFB6E /* BigRedBountyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRedBountyApp.swift; sourceTree = "<group>"; };
 		07DC9FD9292ECB15007BFB6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,10 +102,14 @@
 		07DC9FD6292ECB15007BFB6E /* BigRedBounty */ = {
 			isa = PBXGroup;
 			children = (
+				07C7A075292F0BB700750B6D /* MainView.swift */,
+				07C7A07D292F1E4800750B6D /* Home.swift */,
+				07C7A07B292F17AD00750B6D /* CustomCorner.swift */,
 				07DC9FD7292ECB15007BFB6E /* BigRedBountyApp.swift */,
 				07DC9FD9292ECB15007BFB6E /* ContentView.swift */,
 				07DC9FDB292ECB16007BFB6E /* Assets.xcassets */,
 				07DC9FDD292ECB16007BFB6E /* Preview Content */,
+				07C7A079292F0D9C00750B6D /* Tab.swift */,
 			);
 			path = BigRedBounty;
 			sourceTree = "<group>";
@@ -258,7 +270,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				07DC9FDA292ECB15007BFB6E /* ContentView.swift in Sources */,
+				07C7A07C292F17AD00750B6D /* CustomCorner.swift in Sources */,
+				07C7A076292F0BB700750B6D /* MainView.swift in Sources */,
 				07DC9FD8292ECB15007BFB6E /* BigRedBountyApp.swift in Sources */,
+				07C7A07E292F1E4800750B6D /* Home.swift in Sources */,
+				07C7A07A292F0D9C00750B6D /* Tab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
