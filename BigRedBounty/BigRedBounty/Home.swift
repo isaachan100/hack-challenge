@@ -129,7 +129,7 @@ struct Home: View {
             CustomCarousel(index: $currentIndex, items: bounties, spacing:25,cardPadding:90,id: \.id){bounty, size in
                 BountyCardView(bounty: bounty, size: size)
             }
-            .frame(height:400)
+            .frame(height:380)
             .padding(.top,20)
             .padding(.horizontal,10)
         }
@@ -141,6 +141,43 @@ struct Home: View {
         ZStack{
             LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .clipShape(RoundedRectangle(cornerRadius: 30,style:.continuous))
+            ZStack{
+                Image(bounty.imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width:210,height:200)
+                    .clipped()
+                    .padding(.bottom,110)
+                VStack(spacing:130){
+                    Text("$"+String(bounty.bountyPrice))
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.blue)
+                        .frame(width:50,height:50)
+                        .background{
+                            RoundedRectangle(cornerRadius: 12,style:.continuous)
+                                .fill(.white)
+                        }
+                        .frame(maxWidth: .infinity,alignment: .topTrailing)
+                        .padding(15)
+                        .padding(.bottom,35)
+                    
+                    
+                    HStack{
+                        
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height:100)
+                    .background{
+                        RoundedRectangle(cornerRadius: 25,style:.continuous)
+                            .fill(.white)
+                    }
+                    .padding(10)
+                    .padding(.bottom,15)
+                    
+                    
+                }
+            }
         }
     }
 }
