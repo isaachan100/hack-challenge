@@ -147,6 +147,7 @@ struct Home: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width:210,height:200)
                     .clipped()
+                    .cornerRadius(20)
                     .padding(.bottom,110)
                 VStack(spacing:130){
                     Text("$"+String(bounty.bountyPrice))
@@ -164,7 +165,19 @@ struct Home: View {
                     
                     
                     HStack{
-                        
+                        VStack(alignment:.leading,spacing: 14){
+                            Text(bounty.itemName)
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                                .frame(alignment:.center)
+                                .lineLimit(1)
+                            Text(bounty.location)
+                                .font(.callout)
+                                .frame(alignment:.center)
+                                .lineLimit(1)
+                                
+                            
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height:100)
