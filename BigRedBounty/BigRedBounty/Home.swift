@@ -174,13 +174,20 @@ struct Home: View {
             LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .clipShape(RoundedRectangle(cornerRadius: 30,style:.continuous))
             ZStack{
-                Image(bounty.imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width:210,height:200)
-                    .clipped()
-                    .cornerRadius(20)
-                    .padding(.bottom,110)
+                if currentDetailBounty?.id == bounty.id && showDetailView{
+                    Rectangle()
+                        .fill(.clear)
+                }
+                else{
+                    Image(bounty.imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .matchedGeometryEffect(id: bounty.id, in: animation)
+                        .frame(width:210,height:200)
+                        .clipped()
+                        .cornerRadius(20)
+                        .padding(.bottom,110)
+                }
                 VStack(spacing:130){
                     Text("$"+String(bounty.bountyPrice))
                         .font(.title2)
@@ -201,6 +208,7 @@ struct Home: View {
                             Text(bounty.itemName)
                                 .font(.callout)
                                 .fontWeight(.semibold)
+                            
                                 .frame(maxWidth:.infinity,alignment:.center)
                                 .lineLimit(1)
                             Text(bounty.location)
