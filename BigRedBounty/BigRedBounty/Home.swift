@@ -11,6 +11,13 @@ struct Home: View {
     @State var searchText = ""
     @State var searching = false
     @State var currentIndex:Int = 0
+    @State var button1Pressed:Bool = true
+    @State var button2Pressed:Bool = false
+    @State var button3Pressed:Bool = false
+    @State var showDetailView:Bool = false
+    @State var currentDetailBounty:Bounty?
+    @Namespace var animation
+    
     var body: some View {
         ScrollView(.vertical,showsIndicators: false){
             VStack(spacing:15){
@@ -23,7 +30,12 @@ struct Home: View {
             .padding(15)
             .padding(.bottom,50)
         }
-        
+        .overlay{
+            if let currentDetailBounty,showDetailView{
+                DetailView(showView: $showDetailView, animation: animation, bounty: currentDetailBounty)
+                    .transition(.asymmetric(insertion: .identity, removal: .offset(x:0.5)))
+            }
+        }
     }
     @ViewBuilder
     func HeaderView()->some View{
@@ -95,31 +107,43 @@ struct Home: View {
         VStack(alignment: .leading, spacing:15){
             HStack(alignment:.center,spacing:0){
                 Button(action: {
-                    
+                    button1Pressed = true
+                    button2Pressed = false
+                    button3Pressed = false
                 }){
-                    Text("Newest").padding(.vertical).padding(.horizontal,15).foregroundColor(.gray.opacity(0.9))
+                    Text("Newest").padding(.vertical).padding(.horizontal,15)
+                        .fontWeight(.semibold)
+                        .foregroundColor(button1Pressed ? .white : .gray.opacity(0.9))
                 }
-                .background(.gray.opacity(0.2))
+                .background(button1Pressed ? .red :.gray.opacity(0.2))
                 .cornerRadius(15)
                 .frame(maxWidth:.infinity,alignment: .leading)
                 .padding(.leading,2)
                 .padding(.top,10)
                 Button(action: {
-                    
+                    button2Pressed = true
+                    button1Pressed = false
+                    button3Pressed = false
                 }){
-                    Text("Highest Bounty").padding(.vertical).padding(.horizontal,15).foregroundColor(.gray.opacity(0.9)).lineLimit(1)
+                    Text("Highest Bounty").padding(.vertical).padding(.horizontal,15)
+                        .fontWeight(.semibold)
+                        .foregroundColor(button2Pressed ? .white : .gray.opacity(0.9)).lineLimit(1)
                 }
-                .background(.gray.opacity(0.2))
+                .background(button2Pressed ? .red : .gray.opacity(0.2))
                 .cornerRadius(15)
                 .frame(maxWidth:.infinity,alignment: .center)
                 .padding(.leading,-25)
                 .padding(.top,10)
                 Button(action: {
-                    
+                    button3Pressed = true
+                    button1Pressed = false
+                    button2Pressed = false
                 }){
-                    Text("Name").padding(.vertical).padding(.horizontal,15).foregroundColor(.gray.opacity(0.9))
+                    Text("Name").padding(.vertical).padding(.horizontal,15)
+                        .fontWeight(.semibold)
+                        .foregroundColor(button3Pressed ? .white : .gray.opacity(0.9))
                 }
-                .background(.gray.opacity(0.2))
+                .background(button3Pressed ? .red : .gray.opacity(0.2))
                 .cornerRadius(15)
                 .frame(alignment: .trailing)
                 .padding(.trailing,2)
@@ -128,6 +152,14 @@ struct Home: View {
             }
             CustomCarousel(index: $currentIndex, items: bounties, spacing:25,cardPadding:90,id: \.id){bounty, size in
                 BountyCardView(bounty: bounty, size: size)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        hideTabBar()
+                        withAnimation(.interactiveSpring(response:0.5,dampingFraction:0.7,blendDuration: 0.7)){
+                            currentDetailBounty = bounty
+                            showDetailView = true
+                        }
+                    }
             }
             .frame(height:380)
             .padding(.top,20)
@@ -169,11 +201,11 @@ struct Home: View {
                             Text(bounty.itemName)
                                 .font(.callout)
                                 .fontWeight(.semibold)
-                                .frame(alignment:.center)
+                                .frame(maxWidth:.infinity,alignment:.center)
                                 .lineLimit(1)
                             Text(bounty.location)
                                 .font(.callout)
-                                .frame(alignment:.center)
+                                .frame(maxWidth:.infinity,alignment:.center)
                                 .lineLimit(1)
                                 
                             

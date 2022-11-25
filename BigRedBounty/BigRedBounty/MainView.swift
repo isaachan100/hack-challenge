@@ -13,6 +13,7 @@ struct MainView: View {
     init(){
         UITabBar.appearance().isHidden = true
     }
+    @State var showTabBar: Bool = true
     var body: some View {
         ZStack(alignment: .bottom){
             TabView(selection: $currentTab){
@@ -27,8 +28,18 @@ struct MainView: View {
                     .tag(Tab.profile)
             }
             TabBar()
+                .offset(y:showTabBar ? 0 : 130)
+                .animation(.interactiveSpring(response:0.6,dampingFraction:0.7,blendDuration: 0.7), value: showTabBar)
         }
         .ignoresSafeArea(.keyboard,edges:.bottom)
+        .onReceive(NotificationCenter.default.publisher(for: .init("SHOWTABBAR"))){_ in
+            showTabBar = true
+            
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init("HIDETABBAR"))){_ in
+            showTabBar = false
+            
+        }
     }
     
     @ViewBuilder
@@ -80,6 +91,14 @@ struct MainView_Previews: PreviewProvider {
 }
 
 extension View{
+    
+    func showTabBar(){
+        NotificationCenter.default.post(name: NSNotification.Name("SHOWTABBAR"), object: nil)
+    }
+    
+    func hideTabBar(){
+        NotificationCenter.default.post(name: NSNotification.Name("HIDETABBAR"), object: nil)
+    }
     @ViewBuilder
     func setTabBarBackground(color:Color)->some View{
         self
