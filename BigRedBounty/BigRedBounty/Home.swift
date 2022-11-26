@@ -19,6 +19,7 @@ struct Home: View {
     @Namespace var animation
     
     var body: some View {
+        
         ScrollView(.vertical,showsIndicators: false){
             VStack(spacing:15){
                 HeaderView()
@@ -30,6 +31,7 @@ struct Home: View {
             .padding(15)
             .padding(.bottom,50)
         }
+        .background(LinearGradient(colors: [.gray.opacity(0.05),.red.opacity(0.1),.red.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing))
         .overlay{
             if let currentDetailBounty,showDetailView{
                 DetailView(showView: $showDetailView, animation: animation, bounty: currentDetailBounty)

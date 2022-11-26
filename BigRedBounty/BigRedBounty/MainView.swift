@@ -79,6 +79,7 @@ struct MainView: View {
         .background{
             CustomCorner(corners: [.topLeft,.topRight], radius: 25)
                 .fill(.gray.opacity(0.2))
+                
                 .ignoresSafeArea()
         }
     }
