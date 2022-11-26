@@ -20,10 +20,10 @@ struct MainView: View {
                 Home()
                     .setTabBarBackground(color: Color("BG"))
                     .tag(Tab.home)
-                Text("Post")
+                Post()
                     .setTabBarBackground(color: Color("BG"))
                     .tag(Tab.plus)
-                Text("Profile")
+                Profile()
                     .setTabBarBackground(color: Color("BG"))
                     .tag(Tab.profile)
             }

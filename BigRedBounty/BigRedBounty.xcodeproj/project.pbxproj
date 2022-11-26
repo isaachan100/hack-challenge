@@ -21,6 +21,8 @@
 		07DC9FE9292ECB16007BFB6E /* BigRedBountyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC9FE8292ECB16007BFB6E /* BigRedBountyTests.swift */; };
 		07DC9FF3292ECB16007BFB6E /* BigRedBountyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC9FF2292ECB16007BFB6E /* BigRedBountyUITests.swift */; };
 		07DC9FF5292ECB16007BFB6E /* BigRedBountyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC9FF4292ECB16007BFB6E /* BigRedBountyUITestsLaunchTests.swift */; };
+		07E09B8D2931CBFA00DC206C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E09B8C2931CBFA00DC206C /* Post.swift */; };
+		07E09B8F2931CC2700DC206C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E09B8E2931CC2700DC206C /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		07DC9FEE292ECB16007BFB6E /* BigRedBountyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigRedBountyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC9FF2292ECB16007BFB6E /* BigRedBountyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRedBountyUITests.swift; sourceTree = "<group>"; };
 		07DC9FF4292ECB16007BFB6E /* BigRedBountyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRedBountyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		07E09B8C2931CBFA00DC206C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		07E09B8E2931CC2700DC206C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				07C7A075292F0BB700750B6D /* MainView.swift */,
+				07E09B8E2931CC2700DC206C /* Profile.swift */,
+				07E09B8C2931CBFA00DC206C /* Post.swift */,
 				07C7A07D292F1E4800750B6D /* Home.swift */,
 				0707580229308B4100649CC9 /* DetailView.swift */,
 				0707580029300BAD00649CC9 /* Bounty.swift */,
@@ -286,7 +292,9 @@
 				07C7A076292F0BB700750B6D /* MainView.swift in Sources */,
 				07DC9FD8292ECB15007BFB6E /* BigRedBountyApp.swift in Sources */,
 				07C7A07E292F1E4800750B6D /* Home.swift in Sources */,
+				07E09B8F2931CC2700DC206C /* Profile.swift in Sources */,
 				07C7A07A292F0D9C00750B6D /* Tab.swift in Sources */,
+				07E09B8D2931CBFA00DC206C /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
