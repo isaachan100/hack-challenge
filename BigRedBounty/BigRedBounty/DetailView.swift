@@ -25,6 +25,8 @@ struct DetailView: View {
                     .background(.white)
                     .cornerRadius(15)
                     .padding(.top,-90)
+                    .offset(x:showContent ? 0 : 1000)
+                
                     
                 Image(bounty.imageName)
                     .resizable()
@@ -79,7 +81,7 @@ struct DetailView: View {
                            
                             .background{
                                 RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                    .fill(.blue)
+                                    .fill(LinearGradient(colors: [.cyan,.blue], startPoint: .leading, endPoint: .trailing))
                             }
                             
                         
@@ -107,7 +109,8 @@ struct DetailView: View {
         })
         .background{
             Rectangle()
-                .fill(Color(red: 255/255, green: 83/255, blue: 73/255).gradient)
+                //.fill(Color(red: 255/255, green: 83/255, blue: 73/255).gradient)
+                .fill(LinearGradient(colors: [Color(red: 239/255, green: 71/255, blue: 58/255),Color(red: 203/255, green: 45/255, blue: 62/255)], startPoint: .topTrailing, endPoint: .bottomLeading))
                 .ignoresSafeArea()
                 .opacity(showContent ? 1 : 0)
         }

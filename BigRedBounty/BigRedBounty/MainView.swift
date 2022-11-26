@@ -56,7 +56,7 @@ struct MainView: View {
                     .background(content:{
                         if currentTab == tab{
                             Circle()
-                                .fill(.red)
+                                .fill(Color(red: 239/255, green: 71/255, blue: 58/255))
                                 .scaleEffect(2.5)
                                 .shadow(color: .black.opacity(0.3),radius:8,x:5,y:10)
                                 .matchedGeometryEffect(id: "TAB", in: animation)

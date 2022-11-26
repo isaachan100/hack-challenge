@@ -45,7 +45,7 @@ struct Home: View {
                     .font(.title.bold())
                     .padding(10)
                     .foregroundColor(.white)
-                    .background(.red)
+                    .background(Color(red: 239/255, green: 71/255, blue: 58/255))
                     .cornerRadius(15)
             
             .frame(maxWidth: .infinity,alignment: .center)
@@ -95,7 +95,7 @@ struct Home: View {
                     .padding(15)
                     .background{
                         RoundedRectangle(cornerRadius: 10,style:.continuous)
-                            .fill(.red)
+                            .fill(Color(red: 239/255, green: 71/255, blue: 58/255))
                     }
             }
         }
@@ -115,7 +115,7 @@ struct Home: View {
                         .fontWeight(.semibold)
                         .foregroundColor(button1Pressed ? .white : .gray.opacity(0.9))
                 }
-                .background(button1Pressed ? .red :.gray.opacity(0.2))
+                .background(button1Pressed ? Color(red: 239/255, green: 71/255, blue: 58/255) :.gray.opacity(0.2))
                 .cornerRadius(15)
                 .frame(maxWidth:.infinity,alignment: .leading)
                 .padding(.leading,2)
@@ -129,7 +129,7 @@ struct Home: View {
                         .fontWeight(.semibold)
                         .foregroundColor(button2Pressed ? .white : .gray.opacity(0.9)).lineLimit(1)
                 }
-                .background(button2Pressed ? .red : .gray.opacity(0.2))
+                .background(button2Pressed ? Color(red: 239/255, green: 71/255, blue: 58/255) : .gray.opacity(0.2))
                 .cornerRadius(15)
                 .frame(maxWidth:.infinity,alignment: .center)
                 .padding(.leading,-25)
@@ -143,7 +143,7 @@ struct Home: View {
                         .fontWeight(.semibold)
                         .foregroundColor(button3Pressed ? .white : .gray.opacity(0.9))
                 }
-                .background(button3Pressed ? .red : .gray.opacity(0.2))
+                .background(button3Pressed ? Color(red: 239/255, green: 71/255, blue: 58/255) : .gray.opacity(0.2))
                 .cornerRadius(15)
                 .frame(alignment: .trailing)
                 .padding(.trailing,2)
@@ -171,7 +171,8 @@ struct Home: View {
     @ViewBuilder
     func BountyCardView(bounty:Bounty,size:CGSize)->some View{
         ZStack{
-            LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            //LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .clipShape(RoundedRectangle(cornerRadius: 30,style:.continuous))
             ZStack{
                 if currentDetailBounty?.id == bounty.id && showDetailView{
