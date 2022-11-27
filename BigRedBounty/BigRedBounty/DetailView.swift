@@ -36,12 +36,20 @@ struct DetailView: View {
                     .clipped()
                     .cornerRadius(20)
                 VStack(spacing:5){
-                    Text(bounty.description)
-                        .font(.system(size: 18))
-                        .multilineTextAlignment(.center)
-                        .lineSpacing(8)
-                        .padding(.top,2)
-                        .padding(10)
+                    VStack{
+                        Text(bounty.description)
+                            .font(.system(size: 16))
+                            .multilineTextAlignment(.leading)
+                            .lineSpacing(8)
+                            .padding(.vertical,20)
+                            .padding(.horizontal,10)
+                            
+                    }
+                    
+                   
+                    
+                    .cornerRadius(20)
+                    .background(.gray.opacity(0.2))
                     HStack{
                         Text("Last Sighted in:")
                             .font(.system(size: 22))
@@ -55,7 +63,8 @@ struct DetailView: View {
                             .cornerRadius(15)
                             .frame(maxWidth:.infinity,alignment:.leading)
                     }
-                    
+                    //.padding(10)
+                    .offset(y:20)
                     HStack{
                         Text("Bounty:")
                             .font(.system(size: 22))
@@ -69,6 +78,9 @@ struct DetailView: View {
                             .cornerRadius(15)
                             .frame(maxWidth:.infinity,alignment:.leading)
                     }
+                    .padding(10)
+                    .offset(y:30)
+                    
                     Button{
                         
                     } label: {
@@ -86,7 +98,10 @@ struct DetailView: View {
                             
                         
                     }
-                    .padding(.top,25)
+                    .offset(y:30)
+                    .padding(10)
+                    
+                   
                     
                 }
                 .padding(15)
@@ -97,7 +112,7 @@ struct DetailView: View {
                         .ignoresSafeArea()
                 }
                 .offset(y:showContent ? 0 : (size.height / 1.5))
-                .padding(.top,35)
+                .padding(.top,25)
             }
             .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
         }

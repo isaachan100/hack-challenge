@@ -19,31 +19,33 @@ struct Home: View {
     @Namespace var animation
     
     var body: some View {
+       
+            ScrollView(.vertical,showsIndicators: false){
+                VStack(spacing:15){
+                    HeaderView()
+                    
+                    SearchView()
+                    
+                    BountiesView()
+                }
+                .padding(15)
+                .padding(.bottom,50)
+            }
+            .background(LinearGradient(colors: [.white.opacity(0.7),.red.opacity(0.15),.red.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing))
+            //.background(.ultraThinMaterial)
+            .overlay{
+                if let currentDetailBounty,showDetailView{
+                    DetailView(showView: $showDetailView, animation: animation, bounty: currentDetailBounty)
+                        .transition(.asymmetric(insertion: .identity, removal: .offset(x:0.5)))
+                }
+            }
         
-        ScrollView(.vertical,showsIndicators: false){
-            VStack(spacing:15){
-                HeaderView()
-                
-                SearchView()
-                
-                BountiesView()
-            }
-            .padding(15)
-            .padding(.bottom,50)
-        }
-        .background(LinearGradient(colors: [.gray.opacity(0.05),.red.opacity(0.1),.red.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing))
-        .overlay{
-            if let currentDetailBounty,showDetailView{
-                DetailView(showView: $showDetailView, animation: animation, bounty: currentDetailBounty)
-                    .transition(.asymmetric(insertion: .identity, removal: .offset(x:0.5)))
-            }
-        }
     }
     @ViewBuilder
     func HeaderView()->some View{
         HStack{
            
-                Text("Bounties")
+                Text("Big Red Bounty")
                     .font(.title.bold())
                     .padding(10)
                     .foregroundColor(.white)
@@ -174,7 +176,7 @@ struct Home: View {
     func BountyCardView(bounty:Bounty,size:CGSize)->some View{
         ZStack{
             //LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
-            LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: [.red.opacity(0.2),.red.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .clipShape(RoundedRectangle(cornerRadius: 30,style:.continuous))
             ZStack{
                 if currentDetailBounty?.id == bounty.id && showDetailView{
