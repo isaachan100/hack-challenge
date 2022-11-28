@@ -18,6 +18,10 @@ struct Home: View {
     @State var currentDetailBounty:Bounty?
     @Namespace var animation
     
+    @State var showSheet = false
+    @State var locationFilter:String = ""
+    @State var minBountyFilter:String = ""
+    
     var body: some View {
        
             ScrollView(.vertical,showsIndicators: false){
@@ -88,7 +92,7 @@ struct Home: View {
                     .fill(.gray.opacity(0.15))
             }
             Button{
-                
+                showSheet = true
             }label:{
                 Image(systemName: "slider.horizontal.3")
                     .resizable()
@@ -102,6 +106,59 @@ struct Home: View {
                             .fill(Color(red: 239/255, green: 71/255, blue: 58/255))
                     }
             }
+            .sheet(isPresented: $showSheet){
+               
+                ScrollView{
+                    VStack(spacing:60){
+                        Text("Filter by")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .padding(.top,30)
+                        HStack(spacing:25){
+                            Text("Location:")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .padding(.leading,0)
+                            TextField("Enter location",text:$locationFilter)
+                                .foregroundColor(.gray)
+                                .padding(10)
+                                .frame(width:200)
+                                .background(.gray.opacity(0.3))
+                                .cornerRadius(10)
+                                .lineLimit(1)
+                            
+                        }
+                        HStack(spacing:25){
+                            Text("Minimum Bounty:")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .padding(.leading,0)
+                            TextField("Enter amount",text:$minBountyFilter)
+                                .foregroundColor(.gray)
+                                .padding(10)
+                                .frame(width:200)
+                                .background(.gray.opacity(0.3))
+                                .cornerRadius(10)
+                                .lineLimit(1)
+                            
+                        }
+                        Button{
+                            showSheet = false
+                        }label:{
+                            Text("Apply")
+                                .fontWeight(.semibold)
+                                .font(.title2)
+                                .padding(10)
+                                .padding(.horizontal,20)
+                                .foregroundColor(.white)
+                                .background(.linearGradient(colors:[.cyan,.blue], startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+                    .presentationDetents([.fraction(0.75),.large])
+                    .presentationDragIndicator(.visible)
+                                }
         }
         .padding(.top,15)
     }
