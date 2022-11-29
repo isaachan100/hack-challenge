@@ -104,6 +104,7 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     description = db.Column(db.String, nullable = False)
     found = db.Column(db.Integer, nullable = False)
+    bounty = db.Column(db.Integer, nullable = False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable = False)
     location_id = db.Column(db.Integer, db.ForeignKey("location.id"), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
@@ -114,9 +115,9 @@ class Item(db.Model):
         """
         self.description = kwargs.get("description")
         self.found = kwargs.get("found")
-        self.category_id = kwargs.get("category_id")
         self.location_id = kwargs.get("location_id")
         self.user_id = kwargs.get("user_id")
+        self.bounty = kwargs.get("bounty")
 
     def serialize(self):
         """
