@@ -126,7 +126,7 @@ def update_item(item_id):
     """
     pass
 
-@app.route("/api/items/claim/<int:item_id/", methods = ["POST"])
+@app.route("/api/items/claim/<int:item_id>/", methods = ["POST"])
 def submit_claim(item_id):
     """
     allows a user to submit a claim for an item
