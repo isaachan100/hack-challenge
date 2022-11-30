@@ -1,5 +1,5 @@
 from re import L
-from db import db, Item, User, Category, Location
+from db import db, Item, User, Location
 from flask import Flask, request
 import json
 import os
@@ -45,7 +45,7 @@ def create_user():
     # password = body.get("password")
     # verify_password = body.get("verify_password")
     # or not password or not verify_password:
-    if not name or not email:
+    if name == None or email == None:
         return failure_response("Missing required fields", 400)
     # if password != verify_password:
     #     return failure_response("Passwords do not match", 400)
@@ -103,41 +103,105 @@ def create_item():
     """
     creates an item
     """
-    pass
+    body = json.loads(request.data)
+    description = body.get("description")
+    found = body.get("found")
+    location_id = body.get("location_id")
+    user_id = body.get("user_id")
+    bounty = body.get("bounty")
+
+    if description == None or found == None or location_id == None or user_id == None or bounty == None:
+        return failure_response("Missing information!")
+
+    item = Item(
+        description = description,
+        found = found,
+        location_id = location_id,
+        user_id = user_id,
+        bounty = bounty
+    )
+
+    db.session.add(item)
+    db.session.commit()
+    return success_response(item.serialize(), 201)
 
 @app.route("/api/items/<int:item_id>/", methods=["GET"])
 def get_item(item_id):
     """
     returns a specific item based on item id
     """
-    pass
+    item = Item.query.filter_by(id = item_id).first()
+
+    if item is None:
+        return failure_response("Item does not exist!", 404)
+
+    return success_response(item.serialize())
 
 @app.route("/api/items/<int:item_id>/", methods=["DELETE"])
 def delete_item(item_id):
     """
     deletes an item based on item id
     """
-    pass
+    item = Item.query.filter_by(id = item_id).first()
+    if item is None:
+        return failure_response("Item does not exist!", 404)
+    
+    db.session.delete(item)
+    db.session.commit()
+
+    return success_response(item.serialize())
 
 @app.route("/api/items/<int:item_id>/", methods = ["POST"])
 def update_item(item_id):
     """
-    updates an item given item id
+    updates an item given item id; cannot edit user or location
     """
-    pass
+    item = Item.query.filter_by(id = item_id).first()
+    if item is None:
+        return failure_response("Item does not exist!", 404)
 
-@app.route("/api/items/claim/<int:item_id>/", methods = ["POST"])
-def submit_claim(item_id):
+    body = json.loads(request.data)
+    description = body.get("description")
+    found = body.get("found")
+    bounty = body.get("bounty")
+
+    if description is None or found is None or bounty is None:
+        return failure_response("Missing information!")
+    
+    item.description = description
+    item.found = found
+    item.bounty = bounty
+
+    db.session.commit()
+    return success_response(item.serialize())
+
+# location routes
+
+@app.route("/api/locations/", methods = ["POST"])
+def create_location():
     """
-    allows a user to submit a claim for an item
+    creates a location object
     """
-    pass
+    body = json.loads(request.data)
+    description = body.get("description")
 
-#create locations
-"""
-creates location objects and adds them to the database
-"""
+    if description is None:
+        return failure_response("Missing description!")
 
+    location = Location(description = description)
+    db.session.add(location)
+    db.session.commit()
+
+    return success_response(location.serialize())
+
+@app.route("/api/locations/")
+def get_locations():
+    """
+    returns all locations
+    """
+    return success_response({"Locations": [
+        l.serialize() for l in Location.query.all()
+    ]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
