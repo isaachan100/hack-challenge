@@ -20,12 +20,12 @@ class User(db.Model):
 
     #user information
     email = db.Column(db.String, nullable = False, unique = True)
-    # password_digest = db.Column(db.String, nullable = False)
+    password_digest = db.Column(db.String, nullable = False)
 
     #session information
-    # session_token = db.Column(db.String, nullable=False, unique=True)
-    # session_expiration = db.Column(db.DateTime, nullable=False)
-    # update_token = db.Column(db.String, nullable=False, unique=True)
+    session_token = db.Column(db.String, nullable=False, unique=True)
+    session_expiration = db.Column(db.DateTime, nullable=False)
+    update_token = db.Column(db.String, nullable=False, unique=True)
 
     def __init__(self, **kwargs):
         """
@@ -33,8 +33,8 @@ class User(db.Model):
         """
         self.name = kwargs.get("name")
         self.email = kwargs.get("email")
-        # self.password_digest = bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
-        # self.renew_session()
+        self.password_digest = bcrypt.hashpw(kwargs.get("password").encode("utf8"), bcrypt.gensalt(rounds=13))
+        self.renew_session()
         
     def serialize(self):
         """
