@@ -168,7 +168,7 @@ struct Home: View {
                                 
                                 if locationFilter != "" && minBountyFilter != ""{
                                     tempList = bounties.filter{
-                                        $0.location == locationFilter
+                                        $0.location.contains( locationFilter)
                                     }
                                     tempList = tempList.filter{
                                         $0.bountyPrice >= Int(minBountyFilter)!
@@ -177,7 +177,7 @@ struct Home: View {
                                 else if locationFilter != ""
                                 {
                                     tempList = bounties.filter{
-                                        $0.location == locationFilter
+                                        $0.location.contains( locationFilter)
                                     }
                                 }
                                 else if minBountyFilter != ""
