@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Foundation
-
+import PhotosUI
 
 //remember to add in decodable for backened. Using Sample Data right now
 struct Bounty: Identifiable,Equatable{

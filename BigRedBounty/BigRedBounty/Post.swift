@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-
+import PhotosUI
 struct Post: View {
     @State var itemNameText = ""
     @State var locationText = ""
     @State var descriptionText = "Description"
     @State var bountyText = ""
-    
+    @State var selectedItem:PhotosPickerItem? = nil
+    @State var selectedImageData:Data? = nil
     var body: some View {
         
             //LinearGradient(colors: [Color(red: 239/255, green: 71/255, blue: 58/255),Color(red: 203/255, green: 45/255, blue: 62/255)],startPoint: .topTrailing,endPoint:.bottomLeading)
@@ -106,9 +107,21 @@ struct Post: View {
                                             .fill(.red.opacity(0.4))
                 }
                                     .offset(y:-50)
-            Button{
-                
-            }label:{
+//            Button{
+//
+//            }label:{
+//                Text("Select Photo")
+//                    .font(.title2)
+//                    .fontWeight(.semibold)
+//
+//                    .padding(10)
+//                    .background(.red.opacity(0.4))
+//                    .foregroundColor(.white)
+//                    .cornerRadius(15)
+//
+//
+//            }
+            PhotosPicker(selection:$selectedItem,matching:.images,photoLibrary:.shared()){
                 Text("Select Photo")
                     .font(.title2)
                     .fontWeight(.semibold)
@@ -117,10 +130,15 @@ struct Post: View {
                     .background(.red.opacity(0.4))
                     .foregroundColor(.white)
                     .cornerRadius(15)
-                    
-                
             }
             .offset(y:-35)
+            .onChange(of: selectedItem){newItem in
+                Task{
+                    if let data = try? await newItem?.loadTransferable(type: Data.self){
+                        selectedImageData = data
+                    }
+                }
+            }
             Button{
                 
             }label:{

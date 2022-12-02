@@ -12,6 +12,7 @@ struct DetailView: View {
     var animation:Namespace.ID
     var bounty:Bounty
     @State var showContent:Bool = false
+   
     var body: some View {
         GeometryReader{
             let size = $0.size
