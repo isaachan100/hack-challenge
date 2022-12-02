@@ -22,6 +22,8 @@ struct Home: View {
     @State var locationFilter:String = ""
     @State var minBountyFilter:String = ""
     
+    @State var tempList:[Bounty] = bounties
+    
     var body: some View {
        
             ScrollView(.vertical,showsIndicators: false){
@@ -43,6 +45,7 @@ struct Home: View {
                         .transition(.asymmetric(insertion: .identity, removal: .offset(x:0.5)))
                 }
             }
+        
         
     }
     @ViewBuilder
@@ -77,14 +80,26 @@ struct Home: View {
                     if startedEditing{
                         withAnimation{
                             searching = true
+                            
                         }
+                        
                     }
                     
                 } onCommit:{
                     withAnimation{
+                        
+                        if searchText == ""{
+                            tempList = bounties
+                        }
+                        else{
+                            tempList = tempList.filter{
+                                $0.itemName.contains(searchText)
+                            }
+                        }
                         searching = false
                     }
                 }
+                
             }
             .padding(15)
             .background{
@@ -143,6 +158,34 @@ struct Home: View {
                             
                         }
                         Button{
+                            if locationFilter == "" && minBountyFilter == "" {
+                                tempList = bounties
+                                
+                            }
+                            else{
+                                
+                                if locationFilter != "" && minBountyFilter != ""{
+                                    tempList = bounties.filter{
+                                        $0.location == locationFilter
+                                    }
+                                    tempList = tempList.filter{
+                                        $0.bountyPrice >= Int(minBountyFilter)!
+                                    }
+                                }
+                                else if locationFilter != ""
+                                {
+                                    tempList = bounties.filter{
+                                        $0.location == locationFilter
+                                    }
+                                }
+                                else if minBountyFilter != ""
+                                {
+                                    tempList = bounties.filter{
+                                        $0.bountyPrice >= Int(minBountyFilter)!
+                                    }
+                                }
+                            }
+                                               
                             showSheet = false
                         }label:{
                             Text("Apply")
@@ -156,11 +199,12 @@ struct Home: View {
                         }
                     }
                 }
-                    .presentationDetents([.fraction(0.75),.large])
+                    .presentationDetents([.fraction(0.55),.large])
                     .presentationDragIndicator(.visible)
                                 }
         }
         .padding(.top,15)
+        
     }
     
     @ViewBuilder
@@ -171,6 +215,9 @@ struct Home: View {
                     button1Pressed = true
                     button2Pressed = false
                     button3Pressed = false
+                    tempList = tempList.sorted{
+                        $0.timestamp < $1.timestamp
+                    }
                 }){
                     Text("Newest").padding(.vertical).padding(.horizontal,15)
                         .fontWeight(.semibold)
@@ -185,6 +232,9 @@ struct Home: View {
                     button2Pressed = true
                     button1Pressed = false
                     button3Pressed = false
+                    tempList = tempList.sorted{
+                        $0.bountyPrice > $1.bountyPrice
+                    }
                 }){
                     Text("Highest Bounty").padding(.vertical).padding(.horizontal,15)
                         .fontWeight(.semibold)
@@ -199,6 +249,9 @@ struct Home: View {
                     button3Pressed = true
                     button1Pressed = false
                     button2Pressed = false
+                    tempList = tempList.sorted{
+                        $0.itemName < $1.itemName
+                    }
                 }){
                     Text("Name").padding(.vertical).padding(.horizontal,15)
                         .fontWeight(.semibold)
@@ -211,7 +264,8 @@ struct Home: View {
                 .padding(.leading,20)
                 .padding(.top,10)
             }
-            CustomCarousel(index: $currentIndex, items: bounties, spacing:25,cardPadding:90,id: \.id){bounty, size in
+            
+            CustomCarousel(index: $currentIndex, items: tempList, spacing:25,cardPadding:90,id: \.id){bounty, size in
                 BountyCardView(bounty: bounty, size: size)
                     .contentShape(Rectangle())
                     .onTapGesture {

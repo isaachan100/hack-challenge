@@ -14,74 +14,88 @@ struct Post: View {
     @State var bountyText = ""
     
     var body: some View {
+        
+            //LinearGradient(colors: [Color(red: 239/255, green: 71/255, blue: 58/255),Color(red: 203/255, green: 45/255, blue: 62/255)],startPoint: .topTrailing,endPoint:.bottomLeading)
+                //.ignoresSafeArea()
+            //CustomCorner(corners: [.topLeft,.topRight], radius: 35)
+//                .fill(LinearGradient(colors: [.white],startPoint: .topTrailing,endPoint:.bottomLeading))
+//                .ignoresSafeArea()
+//                .offset(y:600)
+        
         ZStack{
-            LinearGradient(colors: [Color(red: 239/255, green: 71/255, blue: 58/255),Color(red: 203/255, green: 45/255, blue: 62/255)],startPoint: .topTrailing,endPoint:.bottomLeading)
+            LinearGradient(colors: [.white.opacity(0.7),.red.opacity(0.15),.red.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
-            CustomCorner(corners: [.topLeft,.topRight], radius: 35)
-                .fill(LinearGradient(colors: [.white],startPoint: .topTrailing,endPoint:.bottomLeading))
-                .ignoresSafeArea()
-                .offset(y:600)
+            
             VStack(spacing:15){
                 HeaderView()
                 BodyView()
             }
-            
-            
+            .frame(maxWidth: .infinity,maxHeight: .infinity)
+            .background(.ultraThinMaterial)
         }
+            
+                       // .background(LinearGradient(colors: [.white.opacity(0.7),.red.opacity(0.15),.red.opacity(0.2)], startPoint: .topLeading, endPoint: .bottomTrailing))
+            
     }
     @ViewBuilder
     func HeaderView()->some View{
         Text("Create Post")
-            .foregroundColor(.white)
+            //.foregroundColor(.white)
             .font(.title)
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity,alignment: .center)
+            .frame(width:200)
+            //.background(.red.opacity(0.9))
+            .cornerRadius(10)
+            .padding(10)
+            .padding(.vertical,15)
             .offset(y:-105)
     }
     @ViewBuilder
     func BodyView()->some View{
         VStack{
             
-                TextField("Enter Item Name",text: $itemNameText)
-                .foregroundColor(.black)
+            CustomTextField(placeholder:Text("Enter Item Name").foregroundColor(.white),text: $itemNameText)
+                .foregroundColor(.white)
                     .font(.title)
                     .fontWeight(.semibold)
                     .padding(8)
                     .frame(width:310)
                     
                                         .background{
-                        RoundedRectangle(cornerRadius: 10)
-                                                .fill(.white)
+                        RoundedRectangle(cornerRadius: 15)
+                                                .fill(.red.opacity(0.4))
                     }
-                                        .offset(y:-85)
+                                        .offset(y:-115)
             
-            TextField("Enter Location",text: $locationText)
-                .foregroundColor(.black)
-                .font(.title)
+            CustomTextField(placeholder:Text("Enter Location").foregroundColor(.white),text: $locationText)
+                .foregroundColor(.white)                .font(.title)
                 .fontWeight(.semibold)
                 .padding(8)
                 .frame(width:310)
                 
                                     .background{
                     RoundedRectangle(cornerRadius: 10)
-                                            .fill(.white)
+                                            .fill(.red.opacity(0.4))
                 }
-                                    .offset(y:-65)
+                                    .offset(y:-95)
            
                 TextEditor(text: $descriptionText)
-                    .foregroundColor(.black)
+                .scrollContentBackground(.hidden)
+                .foregroundColor(.white)
                     .font(.title3)
                     .fontWeight(.semibold)
                     .padding(8)
                     .frame(width:310,height:200)
                     .background{
                         RoundedRectangle(cornerRadius: 15)
-                            .fill(.white)
+                            .fill(.red.opacity(0.4))
             }
             .frame(height:200)
-            .offset(y:-50)
-            TextField("Enter Bounty",text: $bountyText)
-                .foregroundColor(.black)
+            .offset(y:-75)
+            CustomTextField(placeholder: Text("Enter Bounty").foregroundColor(.white),text: $bountyText)
+            
+                .foregroundColor(.white)
                 .font(.title)
                 .fontWeight(.semibold)
                 .padding(8)
@@ -89,9 +103,9 @@ struct Post: View {
                 
                                     .background{
                     RoundedRectangle(cornerRadius: 10)
-                                            .fill(.white)
+                                            .fill(.red.opacity(0.4))
                 }
-                                    .offset(y:-30)
+                                    .offset(y:-50)
             Button{
                 
             }label:{
@@ -100,13 +114,13 @@ struct Post: View {
                     .fontWeight(.semibold)
                     
                     .padding(10)
-                    .background(.white)
-                    .foregroundColor(.gray)
+                    .background(.red.opacity(0.4))
+                    .foregroundColor(.white)
                     .cornerRadius(15)
                     
                 
             }
-            .offset(y:-15)
+            .offset(y:-35)
             Button{
                 
             }label:{
@@ -119,7 +133,7 @@ struct Post: View {
                     .background(LinearGradient(colors: [.cyan,.blue], startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(10)
             }
-            .offset(y:20)
+            .offset(y:-20)
         }
     }
 }
