@@ -26,6 +26,7 @@
 		07DC9FF5292ECB16007BFB6E /* BigRedBountyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC9FF4292ECB16007BFB6E /* BigRedBountyUITestsLaunchTests.swift */; };
 		07E09B8D2931CBFA00DC206C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E09B8C2931CBFA00DC206C /* Post.swift */; };
 		07E09B8F2931CC2700DC206C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E09B8E2931CC2700DC206C /* Profile.swift */; };
+		07FD12E82939E88D0053E7B9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD12E72939E88D0053E7B9 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		07DC9FF4292ECB16007BFB6E /* BigRedBountyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRedBountyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		07E09B8C2931CBFA00DC206C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		07E09B8E2931CC2700DC206C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		07FD12E72939E88D0053E7B9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			children = (
 				07C7A075292F0BB700750B6D /* MainView.swift */,
 				07E09B8E2931CC2700DC206C /* Profile.swift */,
+				07FD12E72939E88D0053E7B9 /* Message.swift */,
 				07137FD22939A5290041B810 /* LoginView.swift */,
 				07E09B8C2931CBFA00DC206C /* Post.swift */,
 				0741DF8C29346239000A8374 /* CustomTextField.swift */,
@@ -305,6 +308,7 @@
 				07C7A07E292F1E4800750B6D /* Home.swift in Sources */,
 				0741DF8D29346239000A8374 /* CustomTextField.swift in Sources */,
 				07E09B8F2931CC2700DC206C /* Profile.swift in Sources */,
+				07FD12E82939E88D0053E7B9 /* Message.swift in Sources */,
 				07C7A07A292F0D9C00750B6D /* Tab.swift in Sources */,
 				07E09B8D2931CBFA00DC206C /* Post.swift in Sources */,
 			);

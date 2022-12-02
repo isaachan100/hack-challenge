@@ -12,6 +12,10 @@ struct Profile: View {
     let userList:[Bounty] = bounties.filter{
         $0.userID == "123456789"
     }
+    let userMessages:[Message] = messages.filter{
+        $0.userID == "123456789"
+    }.reversed()
+    
     @State var showSheet:Bool = false
     @State var showUserDetailView:Bool = false
     @State var currentUserDetailBounty:Bounty?
@@ -40,7 +44,48 @@ struct Profile: View {
                         }
                             
                     }
-                    .offset(x:0)
+                    .sheet(isPresented: $showSheet){
+                        var tempUserMessages:[Message] = userMessages
+                        ScrollView(.vertical,showsIndicators: false){
+                            VStack(spacing:30){
+                                Text("Messages")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .padding(.top,30)
+                                ForEach(tempUserMessages){message in
+                                    ZStack{
+                                        Text("User with email: \(message.finderEmail) has found your \(message.itemName). Please contact them.")
+                                            .font(.title2)
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                            .frame(width:300)
+                                            .padding(15)                                               .background{
+                                                RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                    .fill(.blue.opacity(0.8))
+                                            }
+                                                                                        
+                                                                                        .padding(.horizontal,10)
+
+                                        Button{
+                                            
+                                        }label:{
+                                            Image(systemName:"xmark.circle.fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width:30,height:30)
+                                                .foregroundColor(.gray)
+                                                
+                                        }
+                                        .offset(x:161,y:-70)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        .presentationDetents([.fraction(0.75),.large])
+                        .presentationDragIndicator(.visible)
+                    }
+                    
                     Text("Email:")
                         .font(.title3)
                         .fontWeight(.semibold)
