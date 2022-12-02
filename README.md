@@ -14,8 +14,8 @@ _frontend:_
 
 _backend:_
 1. We have more than four routes, with some GET, some POST, and some DELETE
-2. We have ; the user and item table have a one-to-many relationship
-3. API spec was uploaded to the google form
-4. We implemented authentification using the example given in demo7. Some examples of protected endpoints include deleting items, updating items, and deleting a user. 
+2. We have a user, claim, and item object ; the user and item table have a one-to-many relationship and the user and claim table have a one-to-many relationsihp
+3. The API spec was uploaded to the google form
+4. We implemented authentification using the example given in demo7. Some examples of protected endpoints include deleting items, updating items, and deleting a user. We also implemented images using the example given in demo8. The route is /api/upload/. 
 
 _design:_
