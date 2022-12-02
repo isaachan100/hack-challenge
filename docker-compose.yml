@@ -1,0 +1,6 @@
+version: '3'
+services:
+  demo:
+    image: hani890/hack-challenge:v0.0.1
+    ports:
+      - 8000:8000

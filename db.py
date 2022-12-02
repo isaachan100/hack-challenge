@@ -20,12 +20,12 @@ class User(db.Model):
 
     #user information
     email = db.Column(db.String, nullable = False, unique = True)
-    # password_digest = db.Column(db.String, nullable = False)
+    password_digest = db.Column(db.String, nullable = False)
 
     #session information
-    # session_token = db.Column(db.String, nullable=False, unique=True)
-    # session_expiration = db.Column(db.DateTime, nullable=False)
-    # update_token = db.Column(db.String, nullable=False, unique=True)
+    session_token = db.Column(db.String, nullable=False, unique=True)
+    session_expiration = db.Column(db.DateTime, nullable=False)
+    update_token = db.Column(db.String, nullable=False, unique=True)
 
     def __init__(self, **kwargs):
         """
@@ -103,8 +103,8 @@ class Item(db.Model):
     __tablename__ = "item"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     description = db.Column(db.String, nullable = False)
-    found = db.Column(db.Integer, nullable = False)
-    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable = False)
+    found = db.Column(db.Boolean, nullable = False)
+    bounty = db.Column(db.Integer, nullable = False)
     location_id = db.Column(db.Integer, db.ForeignKey("location.id"), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
 
@@ -114,9 +114,9 @@ class Item(db.Model):
         """
         self.description = kwargs.get("description")
         self.found = kwargs.get("found")
-        self.category_id = kwargs.get("category_id")
         self.location_id = kwargs.get("location_id")
         self.user_id = kwargs.get("user_id")
+        self.bounty = kwargs.get("bounty")
 
     def serialize(self):
         """
@@ -126,9 +126,8 @@ class Item(db.Model):
             "id": self.id,
             "description": self.description,
             "found": self.found,
-            "category": Category.query.filter_by(id = self.category_id).first().simple_serialize(),
-            "location": Location.query.filter_by(id = self.location_id).first().simple_serialize(),
-            "user": User.query.filter_by(id = self.user_id).first().simple_serialize()
+            "user": User.query.filter_by(id = self.user_id).first().simple_serialize(),
+            "bounty": self.bounty
         }
 
     def simple_serialize(self):
@@ -138,7 +137,8 @@ class Item(db.Model):
         return {
             "id": self.id,
             "description": self.description,
-            "found": self.found
+            "found": self.found,
+            "bounty": self.bounty
         }
 
 # Location class
@@ -171,42 +171,6 @@ class Location(db.Model):
     def simple_serialize(self):
         """
         simple serializes a location object
-        """
-        return {
-            "id": self.id,
-            "description": self.description
-        }
-
-# category class
-class Category(db.Model):
-    """
-    a category that a lost item falls into, one to many relationship with item
-    """
-
-    __tablename__ = "category"
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    description = db.Column(db.String, nullable = False)
-    items = db.relationship("Item")
-
-    def __init__(self, **kwargs):
-        """
-        initializes a category object
-        """
-        self.description = kwargs.get("description")
-
-    def serialize(self):
-        """
-        serializes a category object
-        """
-        return {
-            "id": self.id,
-            "description": self.description,
-            "items": [i.simple_serialize() for i in self.items]
-        }
-
-    def simple_serialize(self):
-        """
-        simple serializes a category object
         """
         return {
             "id": self.id,
