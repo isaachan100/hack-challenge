@@ -251,6 +251,44 @@ class Item(db.Model):
             "bounty": self.bounty
         }
 
+# claim class
+class Claim(db.Model):
+    """
+    a claim that can be submitted by the finder of that object, one to many relationship with user
+    """
+
+    __tablename__ = "claim"
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    item_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
+    finder_email = db.Column(db.String, nullable = False)
+
+    def __init__(self, **kwargs):
+        """
+        initializes a claim object
+        """
+        self.item_id = kwargs.get("user_id")
+        self.finder_email = kwargs.get("finder_email")
+
+    def serialize(self):
+        """
+        serializes a claim object
+        """
+        return {
+            "id": self.id,
+            "item": Item.query.filter_by(id = self.item_id).first().simple_serialize(),
+            "finder_email": self.finder_email
+        }
+
+    def simple_serialize(self):
+        """
+        simple serializes a claim object
+        """
+        return {
+            "id": self.id,
+            "finder_email": self.finder_email
+        }
+
+
 # Location class
 class Location(db.Model):
     """

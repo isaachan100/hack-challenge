@@ -109,7 +109,7 @@ def create_user():
     })
     
 
-@app.route("/api/users/<int:user_id>/", methods=["GET"])
+@app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
     """
     returns a specific user based on their user id
@@ -118,6 +118,17 @@ def get_user(user_id):
     if not user:
         return failure_response("User not found", 404)
     return success_response(user.serialize())
+
+@app.route("/api/users/claim/<int:user_id>/")
+def get_claims(user_id):
+    """
+    returns all claims on objects lost by a user
+    """
+    user = User.query.filter_by(id = user_id).first()
+    if user is None:
+        return failure_response("User not found", 404)
+
+    
 
 
 @app.route("/api/users/delete/", methods=["DELETE"])
