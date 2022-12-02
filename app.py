@@ -1,5 +1,5 @@
 from re import L
-from db import db, Item, User, Location
+from db import db, Item, User, Location, Asset
 from flask import Flask, request
 import json
 import os
@@ -311,6 +311,28 @@ def update_item(item_id):
 
     db.session.commit()
     return success_response(item.serialize())
+
+# image upload route
+
+@app.route("/api/upload/", methods=["POST"])
+def upload():
+    """
+    Endpoint for uploading an image to AWS given its base64 form,
+    then storing/returning the URL of that image
+    """
+    body = json.loads(request.data)
+    image_data = body.get("image_data")
+
+    if image_data is None:
+        return failure_response("No base64 image found!")
+    
+    asset = Asset(image_data = image_data)
+    db.session.add(asset)
+    db.session.commit()
+
+    return success_response(asset.serialize(), 201)
+
+    
 
 # location routes
 
