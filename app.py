@@ -66,6 +66,11 @@ def verify_session_token(request):
     
     return True, user
 
+# base endpoint
+@app.route("/")
+def hello_world():
+    return json.dumps("hello world!")
+
 # User routes
 
 @app.route("/api/users/", methods=["GET"])
