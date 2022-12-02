@@ -1,5 +1,5 @@
 from re import L
-from db import db, Item, User, Location, Asset
+from db import db, Item, User, Location, Asset, Claim
 from flask import Flask, request
 import json
 import os
@@ -128,7 +128,31 @@ def get_claims(user_id):
     if user is None:
         return failure_response("User not found", 404)
 
-    
+    claims = [c.serialize() for c in Claim.query.filter(Claim.user_id == user_id)]
+    return success_response(claims)
+
+@app.route("/api/users/claim/", methods = ["POST"])
+def create_claim():
+    """
+    submits a claim to a lost object
+    """
+    body = json.loads(request.data)
+    item_id = body.get("item_id")
+    finder_email = body.get("finder_email")
+
+    if item_id is None or finder_email is None:
+        return failure_response("Missing information!")
+
+    item = Item.query.filter_by(id = item_id).first()
+
+    if item is None:
+        return failure_response("Item doesn't exist!", 404)
+
+    claim = Claim(item_id = item_id, finder_email = finder_email, user_id = item.user_id)
+    db.session.add(claim)
+    db.session.commit()
+
+    return success_response(claim.serialize())
 
 
 @app.route("/api/users/delete/", methods=["DELETE"])
@@ -242,6 +266,10 @@ def create_item():
 
     if description == None or found == None or location_id == None or user_id == None or bounty == None:
         return failure_response("Missing information!")
+
+    user = User.query.filter_by(id = user_id).first()
+    if user is None:
+        return failure_response("User doesn't exist!", 404)
 
     item = Item(
         description = description,

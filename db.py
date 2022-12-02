@@ -259,15 +259,17 @@ class Claim(db.Model):
 
     __tablename__ = "claim"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    item_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
+    item_id = db.Column(db.Integer, db.ForeignKey("item.id"), nullable = False)
     finder_email = db.Column(db.String, nullable = False)
 
     def __init__(self, **kwargs):
         """
         initializes a claim object
         """
-        self.item_id = kwargs.get("user_id")
+        self.item_id = kwargs.get("item_id")
         self.finder_email = kwargs.get("finder_email")
+        self.user_id = kwargs.get("user_id")
 
     def serialize(self):
         """
