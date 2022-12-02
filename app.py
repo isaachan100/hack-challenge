@@ -1,5 +1,5 @@
 from re import L
-from db import db, Item, User, Location
+from db import db, Item, User, Location, Asset
 from flask import Flask, request
 import json
 import os
@@ -61,10 +61,15 @@ def verify_session_token(request):
 
     user = User.query.filter(User.session_token == session_token).first()
 
-    if user is None:
+    if user is None or not user.verify_session_token(session_token):
         return False, None
     
     return True, user
+
+# base endpoint
+@app.route("/")
+def hello_world():
+    return json.dumps("hello world!")
 
 # User routes
 
@@ -104,7 +109,7 @@ def create_user():
     })
     
 
-@app.route("/api/users/<int:user_id>/", methods=["GET"])
+@app.route("/api/users/<int:user_id>/")
 def get_user(user_id):
     """
     returns a specific user based on their user id
@@ -113,6 +118,17 @@ def get_user(user_id):
     if not user:
         return failure_response("User not found", 404)
     return success_response(user.serialize())
+
+@app.route("/api/users/claim/<int:user_id>/")
+def get_claims(user_id):
+    """
+    returns all claims on objects lost by a user
+    """
+    user = User.query.filter_by(id = user_id).first()
+    if user is None:
+        return failure_response("User not found", 404)
+
+    
 
 
 @app.route("/api/users/delete/", methods=["DELETE"])
@@ -306,6 +322,28 @@ def update_item(item_id):
 
     db.session.commit()
     return success_response(item.serialize())
+
+# image upload route
+
+@app.route("/api/upload/", methods=["POST"])
+def upload():
+    """
+    Endpoint for uploading an image to AWS given its base64 form,
+    then storing/returning the URL of that image
+    """
+    body = json.loads(request.data)
+    image_data = body.get("image_data")
+
+    if image_data is None:
+        return failure_response("No base64 image found!")
+    
+    asset = Asset(image_data = image_data)
+    db.session.add(asset)
+    db.session.commit()
+
+    return success_response(asset.serialize(), 201)
+
+    
 
 # location routes
 
