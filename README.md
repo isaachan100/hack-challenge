@@ -11,14 +11,11 @@
 **requirements:**
 
 _frontend:_
-- asdf
-- 
 
 _backend:_
 1. We have more than four routes, with some GET, some POST, and some DELETE
 2. We have ; the user and item table have a one-to-many relationship
 3. API spec was uploaded to the google form
-4. We implemented authentification using the example given in demo6. Some examples of protected endpoints include deleting items, updating items, and deleting a user. 
+4. We implemented authentification using the example given in demo7. Some examples of protected endpoints include deleting items, updating items, and deleting a user. 
 
 _design:_
-- 
