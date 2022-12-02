@@ -61,7 +61,7 @@ def verify_session_token(request):
 
     user = User.query.filter(User.session_token == session_token).first()
 
-    if user is None:
+    if user is None or not user.verify_session_token(session_token):
         return False, None
     
     return True, user
