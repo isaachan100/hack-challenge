@@ -11,6 +11,10 @@
 **requirements:**
 
 _frontend:_
+We have 1 UICollection View (Cards of lost items on home tab), and 1 UITableView (Cards of lost items on individual profile tab)
+Present - When clicking on secure bounty button, when clicking on main filter button. 
+Push - When navigating between tabs, when clicking on cards of lost items in both the home tab and the individual profile tab.
+Integrated with backend API to enhance filter function. 
 
 _backend:_
 1. We have more than four routes, with some GET, some POST, and some DELETE
