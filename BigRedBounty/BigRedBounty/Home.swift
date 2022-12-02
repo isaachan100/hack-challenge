@@ -60,6 +60,7 @@ struct Home: View {
                     .cornerRadius(15)
             
             .frame(maxWidth: .infinity,alignment: .center)
+            .shadow(radius: 8,x:6,y:6)
             
         }
        
@@ -106,6 +107,7 @@ struct Home: View {
                 RoundedRectangle(cornerRadius: 10,style:.continuous)
                     .fill(.gray.opacity(0.15))
             }
+            
             Button{
                 showSheet = true
             }label:{
@@ -203,6 +205,7 @@ struct Home: View {
                     .presentationDragIndicator(.visible)
                                 }
         }
+        .shadow(radius: 8,x:6,y:6)
         .padding(.top,15)
         
     }
@@ -228,6 +231,7 @@ struct Home: View {
                 .frame(maxWidth:.infinity,alignment: .leading)
                 .padding(.leading,2)
                 .padding(.top,10)
+                .shadow(color:button1Pressed ? .black.opacity(0.33) : .gray.opacity(0.2),radius: 8,x:6,y:6)
                 Button(action: {
                     button2Pressed = true
                     button1Pressed = false
@@ -245,6 +249,7 @@ struct Home: View {
                 .frame(maxWidth:.infinity,alignment: .center)
                 .padding(.leading,-25)
                 .padding(.top,10)
+                .shadow(color:button2Pressed ? .black.opacity(0.33) : .gray.opacity(0.2),radius: 8,x:6,y:6)
                 Button(action: {
                     button3Pressed = true
                     button1Pressed = false
@@ -263,6 +268,7 @@ struct Home: View {
                 .padding(.trailing,2)
                 .padding(.leading,20)
                 .padding(.top,10)
+                .shadow(color:button3Pressed ? .black.opacity(0.33) : .gray.opacity(0.2),radius: 8,x:6,y:6)
             }
             
             CustomCarousel(index: $currentIndex, items: tempList, spacing:25,cardPadding:90,id: \.id){bounty, size in
@@ -279,6 +285,7 @@ struct Home: View {
             .frame(height:380)
             .padding(.top,20)
             .padding(.horizontal,10)
+            
         }
         .padding(.top,10)
     }
@@ -289,6 +296,7 @@ struct Home: View {
             //LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
             LinearGradient(colors: [.red.opacity(0.2),.red.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .clipShape(RoundedRectangle(cornerRadius: 30,style:.continuous))
+                .shadow(color:.black.opacity(0.05),radius: 8,x:6,y:6)
             ZStack{
                 if currentDetailBounty?.id == bounty.id && showDetailView{
                     Rectangle()
@@ -303,6 +311,7 @@ struct Home: View {
                         .clipped()
                         .cornerRadius(20)
                         .padding(.bottom,110)
+                        .shadow(radius: 8,x:6,y:6)
                 }
                 VStack(spacing:130){
                     Text("$"+String(bounty.bountyPrice))
@@ -317,6 +326,7 @@ struct Home: View {
                         .frame(maxWidth: .infinity,alignment: .topTrailing)
                         .padding(15)
                         .padding(.bottom,35)
+                        .shadow(radius: 8,x:6,y:6)
                     
                     
                     HStack{
@@ -343,6 +353,7 @@ struct Home: View {
                     }
                     .padding(10)
                     .padding(.bottom,15)
+                    .shadow(radius: 8,x:6,y:6)
                     
                     
                 }
