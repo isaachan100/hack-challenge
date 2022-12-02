@@ -66,8 +66,10 @@ struct Post: View {
                                         .background{
                         RoundedRectangle(cornerRadius: 15)
                                                 .fill(.red.opacity(0.4))
+                                                .shadow(radius: 5,x:11,y:11)
                     }
                                         .offset(y:-115)
+            
             
             CustomTextField(placeholder:Text("Enter Location").foregroundColor(.white),text: $locationText)
                 .foregroundColor(.white)                .font(.title)
@@ -78,6 +80,7 @@ struct Post: View {
                                     .background{
                     RoundedRectangle(cornerRadius: 10)
                                             .fill(.red.opacity(0.4))
+                                            .shadow(radius: 5,x:11,y:11)
                 }
                                     .offset(y:-95)
            
@@ -91,6 +94,7 @@ struct Post: View {
                     .background{
                         RoundedRectangle(cornerRadius: 15)
                             .fill(.red.opacity(0.4))
+                            .shadow(color:.black.opacity(0.3),radius: 5,x:11,y:11)
             }
             .frame(height:200)
             .offset(y:-75)
@@ -105,6 +109,7 @@ struct Post: View {
                                     .background{
                     RoundedRectangle(cornerRadius: 10)
                                             .fill(.red.opacity(0.4))
+                                            .shadow(radius: 5,x:11,y:11)
                 }
                                     .offset(y:-50)
 //            Button{
@@ -139,6 +144,7 @@ struct Post: View {
                     }
                 }
             }
+            .shadow(radius: 5,x:10,y:10)
             Button{
                 
             }label:{
@@ -151,6 +157,7 @@ struct Post: View {
                     .background(LinearGradient(colors: [.cyan,.blue], startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(10)
             }
+            .shadow(radius: 8,x:7,y:7)
             .offset(y:-20)
         }
     }

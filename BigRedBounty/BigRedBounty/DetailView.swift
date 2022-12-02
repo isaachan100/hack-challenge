@@ -27,6 +27,7 @@ struct DetailView: View {
                     .cornerRadius(15)
                     .padding(.top,-90)
                     .offset(x:showContent ? 0 : 1000)
+                    .shadow(radius: 8,x:6,y:6)
                 
                     
                 Image(bounty.imageName)
@@ -36,6 +37,7 @@ struct DetailView: View {
                     .frame(width:size.width-50,height:size.height/2.5)
                     .clipped()
                     .cornerRadius(20)
+                    .shadow(radius: 8,x:6,y:6)
                 VStack(spacing:5){
                     VStack{
                         Text(bounty.description)
@@ -51,6 +53,7 @@ struct DetailView: View {
                     
                     .cornerRadius(20)
                     .background(.gray.opacity(0.2))
+                    
                     HStack{
                         Text("Last Sighted in:")
                             .font(.system(size: 22))
@@ -101,6 +104,7 @@ struct DetailView: View {
                     }
                     .offset(y:30)
                     .padding(10)
+                    .shadow(radius: 8,x:6,y:6)
                     
                    
                     

@@ -26,7 +26,7 @@ struct UserDetailView: View {
                     .cornerRadius(15)
                     .padding(.top,-90)
                     .offset(x:showContent ? 0 : 1000)
-                
+                    .shadow(radius: 5,x:11,y:11)
                     
                 Image(bounty.imageName)
                     .resizable()
@@ -35,6 +35,7 @@ struct UserDetailView: View {
                     .frame(width:size.width-50,height:size.height/2.5)
                     .clipped()
                     .cornerRadius(20)
+                    .shadow(radius: 5,x:11,y:11)
                 VStack(spacing:5){
                     VStack{
                         Text(bounty.description)
@@ -100,6 +101,7 @@ struct UserDetailView: View {
                     }
                     .offset(y:30)
                     .padding(10)
+                    .shadow(radius: 8,x:8,y:8)
                     
                    
                     

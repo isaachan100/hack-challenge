@@ -32,6 +32,7 @@ struct Profile: View {
                             Circle()
                                 .fill(LinearGradient(colors: [Color(red: 239/255, green: 71/255, blue: 58/255),Color(red: 203/255, green: 45/255, blue: 62/255)], startPoint: .topTrailing, endPoint: .bottomLeading))
                                 .frame(width:60,height:60)
+                                .shadow(radius: 5,x:7,y:7)
                             Image(systemName:"envelope.fill")
                                 .resizable()
                                 .scaledToFit()
@@ -62,6 +63,7 @@ struct Profile: View {
                                             .padding(15)                                               .background{
                                                 RoundedRectangle(cornerRadius: 15, style: .continuous)
                                                     .fill(.blue.opacity(0.8))
+                                                    
                                             }
                                                                                         
                                                                                         .padding(.horizontal,10)
@@ -138,7 +140,7 @@ struct Profile: View {
             //LinearGradient(colors: [.red.opacity(0.25),.red.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing)
             LinearGradient(colors: [.red.opacity(0.2),.red.opacity(0.6)], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .clipShape(RoundedRectangle(cornerRadius: 30,style:.continuous))
-            ZStack{
+                            ZStack{
                 if currentUserDetailBounty?.id == bounty.id && showUserDetailView{
                     Rectangle()
                         .fill(.clear)
@@ -152,6 +154,7 @@ struct Profile: View {
                         .clipped()
                         .cornerRadius(20)
                         .padding(.bottom,75)
+                        .shadow(radius: 5,x:7,y:7)
                 }
                 VStack(spacing:70){
                     Text("$"+String(bounty.bountyPrice))
@@ -166,6 +169,7 @@ struct Profile: View {
                         .frame(maxWidth: .infinity,alignment: .topTrailing)
                         .padding(15)
                         .padding(.bottom,35)
+                        .shadow(radius: 5,x:6,y:6)
                     
                     
                     HStack{
@@ -189,6 +193,7 @@ struct Profile: View {
                     .background{
                         RoundedRectangle(cornerRadius: 15,style:.continuous)
                             .fill(.white)
+                            .shadow(radius: 5,x:7,y:7)
                     }
                     .padding(8)
                     .padding(.bottom,20)
