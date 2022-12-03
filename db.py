@@ -240,7 +240,7 @@ class Item(db.Model):
             "found": self.found,
             "user": User.query.filter_by(id = self.user_id).first().simple_serialize(),
             "bounty": self.bounty,
-            "link": self.link
+            "link": self.image_link
         }
 
     def simple_serialize(self):
@@ -252,7 +252,7 @@ class Item(db.Model):
             "description": self.description,
             "found": self.found,
             "bounty": self.bounty,
-            "link": self.link
+            "link": self.image_link
         }
 
 # claim class
