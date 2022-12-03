@@ -4,7 +4,6 @@ from flask import Flask, request
 import json
 import os
 import datetime
-from flask_mail import Mail, Message
 
 app = Flask(__name__)
 db_filename = "lostandfound.db"
