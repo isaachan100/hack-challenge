@@ -5,6 +5,8 @@
 **tagline:** an app that allows users to make posts of lost items and offer rewards for users who find them
 
 **screenshots:**
+<img width="239" alt="image" src="https://user-images.githubusercontent.com/67351739/205424422-62614e54-b5ad-4d39-bd96-0599beb627f4.png">
+
 
 **description:** Ever lost a precious belonging and wished there was a way to get it back without walking all the way to Barton? Big Red Bounty is your solution! Users of our app can make posts for items they have lost, and offer a reward for someone who finds their belongings. This way, you can incentivize other people to help look for your lost items and make sure to find it. 
 
