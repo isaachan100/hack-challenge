@@ -228,7 +228,7 @@ class Item(db.Model):
         self.location_id = kwargs.get("location_id")
         self.user_id = kwargs.get("user_id")
         self.bounty = kwargs.get("bounty")
-        self.link = kwargs.get("link")
+        self.image_link = kwargs.get("link")
 
     def serialize(self):
         """
