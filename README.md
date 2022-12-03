@@ -27,3 +27,4 @@ _backend:_
 4. We implemented authentification using the example given in demo7. Some examples of protected endpoints include deleting items, updating items, and deleting a user. We also implemented images using the example given in demo8. The route is /api/upload/. 
 
 _design:_
+https://www.figma.com/file/TkvQaKNtEcRmGbtIjKZ6XH/Hack-challenge?node-id=142%3A35&t=usF1AB6BXSa1FSWd-1
