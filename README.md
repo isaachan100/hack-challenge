@@ -6,15 +6,17 @@
 
 **screenshots:**
 
-**description:** Ever lost a precious belonging and wished there was a way to get it back? Big Red Bounty is your solution! Users of our app can make posts for items they have lost, and offer a reward for someone who finds their belongings. This way, you can incentive other people to help look for your lost items and make sure to find it.
+**description:** Ever lost a precious belonging and wished there was a way to get it back without walking all the way to Barton? Big Red Bounty is your solution! Users of our app can make posts for items they have lost, and offer a reward for someone who finds their belongings. This way, you can incentivize other people to help look for your lost items and make sure to find it. 
+
+The app allows you to make a post with things like the item name, last known location, and description along with the option to enter a bounty to incentivize others to help you find the object. In the profile page, your lost items posts will be displayed in a list, and there is a message inbox component where you can be notified if someone discovers your item. In the homepage, any person can use the filter, searching, or sorting functions to narrow down the list. You can click on the cards on display, which will lead you to another view with information about the item and a button that lets you notify the owner.
 
 **requirements:**
 
 _frontend:_
-1. We have 1 UICollection View (Cards of lost items on home tab), and 1 UITableView (Cards of lost items on individual profile tab)
-2. Present - When clicking on secure bounty button, when clicking on main filter button. 
-3. Push - When navigating between tabs, when clicking on cards of lost items in both the home tab and the individual profile tab.
-4. Integrated with backend API to enhance filter function. 
+1. We used SwiftUI to layout the app with constraints.
+2. We have SwiftUI equivalent of CollectionViews as a horizontal carousel on the homepage and a two column grid on the profile page.
+3. We have sheets that are presented from buttons like the filter button on the homepage and the message inbox on the profile page.
+4. The backened provided the framework for the creation of accounts in the sign up page and login with authentication. 
 
 _backend:_
 1. We have more than four routes, with some GET, some POST, and some DELETE
