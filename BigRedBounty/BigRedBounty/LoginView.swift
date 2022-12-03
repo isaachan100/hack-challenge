@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var loginSuccess: Bool = false
+    
     @State var delayPassed:Bool = false
     
     @State var index = 0
@@ -87,6 +87,7 @@ struct CShape1:Shape{
 struct Login:View{
     @State var email = ""
     @State var pass = ""
+    @State var loginSuccess: Bool = false
     @Binding var index:Int
     var body: some View{
         ZStack(alignment:.bottom){
@@ -95,9 +96,9 @@ struct Login:View{
                     
                     VStack(spacing:10){
                         Text("Login")
-                        .foregroundColor(.black)
-                        .font(.title)
-                        .fontWeight(.bold)
+                            .foregroundColor(.black)
+                            .font(.title)
+                            .fontWeight(.bold)
                         Capsule()
                             .fill(self.index == 0 ? Color.blue : Color.clear)
                             .frame(width:100,height:5)
@@ -149,9 +150,9 @@ struct Login:View{
             }
             .cornerRadius(35)
             .padding(.horizontal,20)
-            
+            NavigationLink(destination: ContentView(), isActive:$loginSuccess){
             Button(action:{
-                
+                loginSuccess = true
             }){
                 Text("LOGIN")
                     .foregroundColor(.white)
@@ -164,6 +165,7 @@ struct Login:View{
             }
             .offset(y:15)
             .opacity(self.index == 0 ? 1 : 0)
+        }
         }
     }
 }
@@ -235,7 +237,7 @@ struct SignUp:View{
             .padding(.horizontal,20)
             
             Button(action:{
-                
+                NetworkController.postUser(name: name, email: email, password: pass)
             }){
                 Text("SIGNUP")
                     .foregroundColor(.white)
@@ -251,6 +253,8 @@ struct SignUp:View{
             .opacity(self.index == 1 ? 1 : 0)
         }
     }
+    
+    
 }
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

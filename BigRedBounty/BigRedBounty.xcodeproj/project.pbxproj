@@ -14,6 +14,7 @@
 		07137FD52939D0940041B810 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07137FD42939D0930041B810 /* UserDetailView.swift */; };
 		0741DF8D29346239000A8374 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0741DF8C29346239000A8374 /* CustomTextField.swift */; };
 		078D396F293AC330004B77B2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078D396E293AC330004B77B2 /* User.swift */; };
+		078D3971293AE7D9004B77B2 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078D3970293AE7D9004B77B2 /* NetworkController.swift */; };
 		07C7A076292F0BB700750B6D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A075292F0BB700750B6D /* MainView.swift */; };
 		07C7A07A292F0D9C00750B6D /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A079292F0D9C00750B6D /* Tab.swift */; };
 		07C7A07C292F17AD00750B6D /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7A07B292F17AD00750B6D /* CustomCorner.swift */; };
@@ -55,6 +56,7 @@
 		07137FD42939D0930041B810 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		0741DF8C29346239000A8374 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		078D396E293AC330004B77B2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		078D3970293AE7D9004B77B2 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		07C7A075292F0BB700750B6D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		07C7A079292F0D9C00750B6D /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		07C7A07B292F17AD00750B6D /* CustomCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				07E09B8E2931CC2700DC206C /* Profile.swift */,
 				07FD12E72939E88D0053E7B9 /* Message.swift */,
 				07137FD22939A5290041B810 /* LoginView.swift */,
+				078D3970293AE7D9004B77B2 /* NetworkController.swift */,
 				078D396E293AC330004B77B2 /* User.swift */,
 				07E09B8C2931CBFA00DC206C /* Post.swift */,
 				0741DF8C29346239000A8374 /* CustomTextField.swift */,
@@ -302,6 +305,7 @@
 				0707580129300BAD00649CC9 /* Bounty.swift in Sources */,
 				0707580329308B4100649CC9 /* DetailView.swift in Sources */,
 				07DC9FDA292ECB15007BFB6E /* ContentView.swift in Sources */,
+				078D3971293AE7D9004B77B2 /* NetworkController.swift in Sources */,
 				07137FD32939A5290041B810 /* LoginView.swift in Sources */,
 				078D396F293AC330004B77B2 /* User.swift in Sources */,
 				07137FD52939D0940041B810 /* UserDetailView.swift in Sources */,

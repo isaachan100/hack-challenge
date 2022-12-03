@@ -146,7 +146,7 @@ struct Post: View {
             }
             .shadow(radius: 5,x:10,y:10)
             Button{
-                
+                bounties.append(Bounty(imageName: "thinkpad", itemName: itemNameText, description: descriptionText, bountyPrice: Int(bountyText)!, location: locationText, found: false, timestamp: Date(), userID: "123456789"))
             }label:{
                 Text("Place Bounty")
                     .font(.title2)
