@@ -4,9 +4,11 @@ from flask import Flask, request
 import json
 import os
 import datetime
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 db_filename = "lostandfound.db"
+
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///%s" % db_filename
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -243,7 +245,6 @@ def logout():
     return success_response({"message": "You have successfully logged out"})
 
 # Item routes
-
 @app.route("/api/items/", methods=["GET"])
 def get_items():
     """
@@ -263,8 +264,9 @@ def create_item():
     location_id = body.get("location_id")
     user_id = body.get("user_id")
     bounty = body.get("bounty")
+    link = body.get("link")
 
-    if description == None or found == None or location_id == None or user_id == None or bounty == None:
+    if description == None or found == None or location_id == None or user_id == None or bounty == None or link is None:
         return failure_response("Missing information!")
 
     user = User.query.filter_by(id = user_id).first()
@@ -276,7 +278,8 @@ def create_item():
         found = found,
         location_id = location_id,
         user_id = user_id,
-        bounty = bounty
+        bounty = bounty,
+        link = link
     )
 
     db.session.add(item)

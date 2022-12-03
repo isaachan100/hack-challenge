@@ -217,6 +217,7 @@ class Item(db.Model):
     bounty = db.Column(db.Integer, nullable = False)
     location_id = db.Column(db.Integer, db.ForeignKey("location.id"), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
+    image_link = db.Column(db.String, nullable = False)
 
     def __init__(self, **kwargs):
         """
@@ -227,6 +228,7 @@ class Item(db.Model):
         self.location_id = kwargs.get("location_id")
         self.user_id = kwargs.get("user_id")
         self.bounty = kwargs.get("bounty")
+        self.link = kwargs.get("link")
 
     def serialize(self):
         """
@@ -237,7 +239,8 @@ class Item(db.Model):
             "description": self.description,
             "found": self.found,
             "user": User.query.filter_by(id = self.user_id).first().simple_serialize(),
-            "bounty": self.bounty
+            "bounty": self.bounty,
+            "link": self.link
         }
 
     def simple_serialize(self):
@@ -248,7 +251,8 @@ class Item(db.Model):
             "id": self.id,
             "description": self.description,
             "found": self.found,
-            "bounty": self.bounty
+            "bounty": self.bounty,
+            "link": self.link
         }
 
 # claim class
